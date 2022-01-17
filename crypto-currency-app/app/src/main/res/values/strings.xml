@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CryptoCurrencyApp</string>
+    <string name="common_error_network_connection">Bağlantı hatası, lütfen tekrar deneyin</string>
+    <string name="common_error_unknown">Bilinmeyen hata.</string>
+    <string name="common_error_timeout">Bağlantı zaman aşımına uğradı.</string>
 </resources>

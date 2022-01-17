@@ -20,6 +20,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", '"https://api.github.com"'
+        buildConfigField "String", "API_KEY", '"YOUR_API_KEY"'
         multiDexEnabled true
     }
 
@@ -94,6 +95,7 @@ version = [
         testRules            : '1.2.0',
         mockk                : '1.10.2',
         kotlinReflect        : '1.5.0',
+        fragment             : '1.2.5',
 ]
 
 dependencies {
@@ -109,6 +111,7 @@ dependencies {
     // Androidx
     implementation "androidx.core:core-ktx:$version.androidKtx"
     implementation "androidx.navigation:navigation-fragment-ktx:$version.navigation"
+    implementation "androidx.fragment:fragment-ktx:$version.fragment"
     implementation "androidx.navigation:navigation-ui-ktx:$version.navigation"
     implementation "androidx.constraintlayout:constraintlayout:$version.constraintLayout"
     implementation "androidx.preference:preference-ktx:$version.preference"
