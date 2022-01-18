@@ -1,30 +1,19 @@
 package com.bkarakoca.cryptocurrencyapp.internal.injection.module
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import com.bkarakoca.cryptocurrencyapp.internal.DaggerApplication
 import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
 import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProviderImpl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 internal class AppModule {
-
-    @Provides
-    @Singleton
-    internal fun provideApplicationContext(application: DaggerApplication): Context {
-        return application.applicationContext
-    }
-
-    @Provides
-    @Singleton
-    internal fun provideApplication(application: DaggerApplication): Application {
-        return application
-    }
 
     @Provides
     @Singleton
