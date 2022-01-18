@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.IdRes
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.annotation.LayoutRes
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.navGraphViewModels
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -23,17 +19,12 @@ import com.bkarakoca.cryptocurrencyapp.internal.extension.showPopup
 import com.bkarakoca.cryptocurrencyapp.internal.util.functional.lazyThreadSafetyNone
 import com.bkarakoca.cryptocurrencyapp.navigation.NavigationCommand
 import com.bkarakoca.cryptocurrencyapp.scene.main.MainActivity
-import dagger.android.support.DaggerFragment
 import java.lang.reflect.ParameterizedType
-import javax.inject.Inject
 
 abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> :
-    DaggerFragment() {
+    Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    internal lateinit var binder: B
+    lateinit var binder: B
 
     @get:LayoutRes
     abstract val layoutId: Int
@@ -43,28 +34,10 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> :
     }
 
     @Suppress("UNCHECKED_CAST")
-    protected open val viewModel by lazyThreadSafetyNone {
+    protected val viewModel by lazyThreadSafetyNone {
         val persistentViewModelClass = (javaClass.genericSuperclass as ParameterizedType)
             .actualTypeArguments[0] as Class<VM>
-        return@lazyThreadSafetyNone ViewModelProvider(this, viewModelFactory)
-            .get(persistentViewModelClass)
-    }
-
-    protected inline fun <reified VM : ViewModel> activityViewModels(): Lazy<VM> {
-        return activityViewModels { viewModelFactory }
-    }
-
-    protected inline fun <reified VM : ViewModel> viewModels(): Lazy<VM> {
-        return viewModels { viewModelFactory }
-    }
-
-    protected inline fun <reified VM : ViewModel> parentViewModels(): Lazy<VM> {
-        return requireParentFragment().viewModels { viewModelFactory }
-    }
-
-    protected inline fun <reified VM : ViewModel> navGraphViewModels(@IdRes navGraphId: Int):
-            Lazy<VM> {
-        return navGraphViewModels(navGraphId) { viewModelFactory }
+        return@lazyThreadSafetyNone ViewModelProvider(this)[persistentViewModelClass]
     }
 
     override fun onCreateView(

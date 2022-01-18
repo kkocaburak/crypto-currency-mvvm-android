@@ -4,10 +4,11 @@ import com.bkarakoca.cryptocurrencyapp.BuildConfig
 import com.bkarakoca.cryptocurrencyapp.internal.util.NetworkStateHolder
 import com.bkarakoca.cryptocurrencyapp.internal.util.api.ErrorHandlingInterceptor
 import com.google.gson.Gson
-import com.moczul.ok2curl.CurlInterceptor
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import okhttp3.OkHttpClient
@@ -16,6 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
+@InstallIn(SingletonComponent::class)
 internal class NetworkModule {
 
     companion object {
@@ -24,18 +26,28 @@ internal class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor()
+    }
+
+    @Provides
+    @Singleton
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        curlInterceptor: CurlInterceptor
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
             .connectTimeout(CLIENT_TIME_OUT_SEC, TimeUnit.SECONDS)
             .readTimeout(CLIENT_TIME_OUT_SEC, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(curlInterceptor)
             .addInterceptor(ErrorHandlingInterceptor(NetworkStateHolder, ))
 
         return httpClient.build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return Gson().newBuilder().create()
     }
 
     @Provides

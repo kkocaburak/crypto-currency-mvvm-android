@@ -12,7 +12,9 @@ import com.bkarakoca.cryptocurrencyapp.databinding.ActivityMainBinding
 import com.bkarakoca.cryptocurrencyapp.internal.extension.observeNonNull
 import com.bkarakoca.cryptocurrencyapp.internal.extension.showPopup
 import com.bkarakoca.cryptocurrencyapp.navigation.NavigationCommand
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseBindingActivity<MainViewModel, ActivityMainBinding>() {
 
     override val layoutId get() = R.layout.activity_main

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CryptoCurrencyApp</string>
+
+    <!-- Common Resources -->
+    <string name="common_error_network_connection">Network error, please try again.</string>
+    <string name="common_error_unknown">Unknown error.</string>
+    <string name="common_error_timeout">Timeout error.</string>
+    <!-- Common Resources -->
+
+    <!-- Crypto Resources -->
+    <string name="crypto_list_header">Binance - Crypto Coin List</string>
+    <string name="crypto_list_search_hint">Search Crypto Coin</string>
+
+    <string name="crypto_coin_price_prefix">Current Price: </string>
+    <!-- Crypto Resources -->
+
+</resources>

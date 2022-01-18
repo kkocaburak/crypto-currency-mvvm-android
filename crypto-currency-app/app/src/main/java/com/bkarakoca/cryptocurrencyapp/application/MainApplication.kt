@@ -1,10 +1,15 @@
 package com.bkarakoca.cryptocurrencyapp.application
 
-import com.bkarakoca.cryptocurrencyapp.internal.DaggerApplication
+import android.app.Application
+import com.bkarakoca.cryptocurrencyapp.internal.util.NetworkStateHolder.registerConnectivityMonitor
+import dagger.hilt.android.HiltAndroidApp
 
-class MainApplication : DaggerApplication() {
+@HiltAndroidApp
+class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        registerConnectivityMonitor()
     }
 }

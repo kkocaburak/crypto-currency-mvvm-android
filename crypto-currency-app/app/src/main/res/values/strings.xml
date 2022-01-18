@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">CryptoCurrencyApp</string>
-    <string name="common_error_network_connection">Bağlantı hatası, lütfen tekrar deneyin</string>
+
+    <!-- Common Resources -->
+    <string name="common_error_network_connection">Bağlantı hatası, lütfen tekrar deneyin.</string>
     <string name="common_error_unknown">Bilinmeyen hata.</string>
     <string name="common_error_timeout">Bağlantı zaman aşımına uğradı.</string>
+    <!-- Common Resources -->
+
+    <!-- Crypto Resources -->
+    <string name="crypto_list_header">Binance - Kripto Para Listesi.</string>
+    <string name="crypto_list_search_hint">Kripto Para Ara</string>
+
+    <string name="crypto_coin_price_prefix">Güncel Fiyat: %s</string>
+    <!-- Crypto Resources -->
+
 </resources>
