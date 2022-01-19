@@ -3,23 +3,25 @@ package com.bkarakoca.cryptocurrencyapp.data.repository.mapper.crypto
 import com.bkarakoca.cryptocurrencyapp.R
 import com.bkarakoca.cryptocurrencyapp.data.remote.model.crypto.CryptoCoinListResponseModel
 import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
-import com.bkarakoca.cryptocurrencyapp.scene.cryptolist.model.CryptoCoinUIModel
+import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.model.CryptoCoinUIModel
 import javax.inject.Inject
 
-class CryptoCoinMapper @Inject constructor(
+class CryptoCoinListMapper @Inject constructor(
     private val resourceProvider: ResourceProvider
 ) {
 
     fun toUIModel(responseModel: CryptoCoinListResponseModel): List<CryptoCoinUIModel> {
-        return responseModel.filter { cryptoCoinResponseModel ->
-            !cryptoCoinResponseModel.id.isNullOrEmpty()
+        return responseModel.filter {
+            (!it.id.isNullOrEmpty()
+                    && !it.name.isNullOrEmpty()
+                    && !it.symbol.isNullOrEmpty())
         }.map { cryptoCoin ->
             CryptoCoinUIModel(
-                id = cryptoCoin.id,
-                coinName = cryptoCoin.name,
-                coinImageUrl = cryptoCoin.image,
-                coinSymbol = cryptoCoin.symbol,
-                coinPrice = resourceProvider.getString(
+                id = cryptoCoin.id ?: "",
+                coinNameText = cryptoCoin.name ?: "",
+                coinImageUrl = cryptoCoin.image ?: "",
+                coinSymbolText = cryptoCoin.symbol ?: "",
+                coinPriceText = resourceProvider.getString(
                     R.string.crypto_coin_price_prefix,
                     cryptoCoin.currentPrice.toString()
                 )

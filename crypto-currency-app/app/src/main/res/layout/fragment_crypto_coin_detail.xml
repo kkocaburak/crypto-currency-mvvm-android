@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptodetail.CryptoCoinDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_large">
+
+        <ImageView
+            android:id="@+id/ivCoin"
+            imageFromUrl="@{viewModel.cryptoDetail.coinImageUrl}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ivCoin">
+
+            <EditText
+                android:id="@+id/etRefreshRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center"
+                android:inputType="number"
+                android:hint="@string/crypto_detail_refresh_rate"
+                app:layout_constraintTop_toBottomOf="@+id/tvHeaderCryptoList" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:text="@{viewModel.cryptoDetail.coinNameText}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:text="@{viewModel.cryptoDetail.coinSymbolText}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:text="@{viewModel.cryptoDetail.coinPriceText}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:text="@{viewModel.cryptoDetail.coinPriceChangeForDayText}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xx_large"
+                android:text="@{viewModel.cryptoDetail.coinHashingAlgorithm}" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/crypto_coin_detail_height"
+                android:layout_marginTop="@dimen/margin_medium">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_xx_large"
+                    android:text="@{viewModel.cryptoDetail.coinDescriptionText}" />
+
+            </ScrollView>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

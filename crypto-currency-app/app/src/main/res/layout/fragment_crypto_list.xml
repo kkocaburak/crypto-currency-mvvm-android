@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.bkarakoca.cryptocurrencyapp.scene.cryptolist.CryptoListViewModel" />
+            type="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.CryptoCoinListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,18 +30,13 @@
             android:hint="@string/crypto_list_search_hint"
             app:layout_constraintTop_toBottomOf="@+id/tvHeaderCryptoList" />
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCryptoCoin"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etSearch">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCryptoCoin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </androidx.core.widget.NestedScrollView>
+            app:layout_constraintTop_toBottomOf="@+id/etSearch"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
