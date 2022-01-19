@@ -3,12 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_crypto"
-    app:startDestination="@id/FRCryptoList">
+    app:startDestination="@id/cryptoCoinListFragment">
 
     <fragment
-        android:id="@+id/FRCryptoList"
-        android:name="com.bkarakoca.cryptocurrencyapp.scene.cryptolist.CryptoListFragment"
-        android:label="fragment_crypto_list"
-        tools:layout="@layout/fragment_crypto_list" />
+        android:id="@+id/cryptoCoinListFragment"
+        android:name="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.CryptoCoinListFragment"
+        android:label="@string/crypto_coin_list"
+        tools:layout="@layout/fragment_crypto_list" >
+        <action
+            android:id="@+id/toCryptoCoinDetailFragment"
+            app:destination="@id/cryptoCoinDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cryptoCoinDetailFragment"
+        android:name="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptodetail.CryptoCoinDetailFragment"
+        android:label="@string/crypto_coin_detail"
+        tools:layout="@layout/fragment_crypto_coin_detail" />
 
 </navigation>

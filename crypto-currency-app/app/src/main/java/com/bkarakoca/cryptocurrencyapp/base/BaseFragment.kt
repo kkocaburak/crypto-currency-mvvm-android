@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -18,7 +17,6 @@ import com.bkarakoca.cryptocurrencyapp.internal.extension.observeNonNull
 import com.bkarakoca.cryptocurrencyapp.internal.extension.showPopup
 import com.bkarakoca.cryptocurrencyapp.internal.util.functional.lazyThreadSafetyNone
 import com.bkarakoca.cryptocurrencyapp.navigation.NavigationCommand
-import com.bkarakoca.cryptocurrencyapp.scene.main.MainActivity
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> :
@@ -30,6 +28,18 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> :
     abstract val layoutId: Int
 
     open fun initialize() {
+        // Do nothing in here. Child classes should implement when necessary
+    }
+
+    open fun initViews() {
+        // Do nothing in here. Child classes should implement when necessary
+    }
+
+    open fun setListeners() {
+        // Do nothing in here. Child classes should implement when necessary
+    }
+
+    open fun setReceivers() {
         // Do nothing in here. Child classes should implement when necessary
     }
 
@@ -59,6 +69,9 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> :
         observeFailure()
 
         initialize()
+        initViews()
+        setListeners()
+        setReceivers()
     }
 
     private fun observeNavigation() {
@@ -73,11 +86,6 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> :
         when (command) {
             is NavigationCommand.ToDirection -> {
                 findNavController().navigate(command.directions, getExtras())
-            }
-            is NavigationCommand.ToDeepLink -> {
-                (activity as? MainActivity)
-                    ?.navController
-                    ?.navigate(command.deepLink.toUri(), null, getExtras())
             }
             is NavigationCommand.Popup -> {
                 with(command) {

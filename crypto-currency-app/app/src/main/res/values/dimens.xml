@@ -15,7 +15,10 @@
 
     <!-- Size -->
     <dimen name="image_medium">64dp</dimen>
+    <dimen name="image_large">128dp</dimen>
     <dimen name="text_medium">24dp</dimen>
+
+    <dimen name="crypto_coin_detail_height">240dp</dimen>
     <!-- Size -->
 
 </resources>

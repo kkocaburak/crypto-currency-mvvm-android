@@ -1,6 +1,6 @@
 package com.bkarakoca.cryptocurrencyapp.domain.crypto
 
-import com.bkarakoca.cryptocurrencyapp.scene.cryptolist.model.CryptoCoinUIModel
+import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.model.CryptoCoinUIModel
 import com.bkarakoca.cryptocurrencyapp.data.repository.CryptoRepository
 import com.bkarakoca.cryptocurrencyapp.internal.util.flow.FlowUseCase
 import kotlinx.coroutines.flow.Flow

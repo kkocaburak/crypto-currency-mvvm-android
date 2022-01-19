@@ -51,14 +51,6 @@ abstract class BaseViewModel : ViewModel() {
         _navigation.value = Event(NavigationCommand.ToDirection(directions))
     }
 
-    fun navigate(deepLink: String) {
-        _navigation.value = Event(NavigationCommand.ToDeepLink(deepLink))
-    }
-
-    fun navigate(@StringRes deepLinkRes: Int) {
-        navigate(getString(deepLinkRes))
-    }
-
     fun navigate(model: PopupModel, listener: PopupListener?) {
         _navigation.value = Event(NavigationCommand.Popup(model, listener))
     }

@@ -10,8 +10,22 @@
     <!-- Crypto Resources -->
     <string name="crypto_list_header">Binance - Kripto Para Listesi.</string>
     <string name="crypto_list_search_hint">Kripto Para Ara</string>
+    <string name="crypto_detail_refresh_rate">Kripto Para Değeri Yenileme Saniyesi</string>
 
-    <string name="crypto_coin_price_prefix">Güncel Fiyat: %s</string>
+    <string name="crypto_coin_name">Kripto Para İsmi: %s</string>
+    <string name="crypto_coin_symbol">Kripto Para Sembolü: %s</string>
+    <string name="crypto_coin_price_prefix">Güncel Fiyat: </string>
+    <string name="crypto_coin_price_change_percentage">Günlük Yüzdelik Fiyat Değişimi: %s</string>
+
+    <string name="crypto_empty_hashing_algorithm">Hash Algoritması Mevcut Değil</string>
+    <string name="crypto_empty_name">Kripto Para İsmi Mevcut Değil</string>
+    <string name="crypto_empty_symbol">Kripto Sembolü Mevcut Değil</string>
+    <string name="crypto_empty_description">Kripto Para Detayı Mevcut Değil</string>
+    <string name="crypto_empty_price">Kripto Para Değeri Bulunamadı</string>
+    <string name="crypto_empty_coin_price_change_percentage">Günlük %lik Değişim Mevcut Değil</string>
+
+    <string name="crypto_coin_list">Kripto Para Liste Ekranı</string>
+    <string name="crypto_coin_detail">Kripto Para Detayı Ekranı</string>
     <!-- Crypto Resources -->
 
 </resources>
