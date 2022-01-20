@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="coinItem"
+            type="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.model.CryptoCoinUIModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large">
+
+        <ImageView
+            android:id="@+id/ivCoin"
+            imageFromUrl="@{coinItem.coinImageUrl}"
+            android:layout_width="@dimen/image_medium"
+            android:layout_height="@dimen/image_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivCoin"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:text="@{coinItem.coinNameText}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:text="@{coinItem.coinSymbolText}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:text="@{coinItem.coinPriceText}" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

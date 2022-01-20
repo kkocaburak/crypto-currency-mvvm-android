@@ -1,0 +1,88 @@
+package com.bkarakoca.cryptocurrencyapp.base
+
+import androidx.annotation.StringRes
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.navigation.NavDirections
+import com.bkarakoca.cryptocurrencyapp.R
+import com.bkarakoca.cryptocurrencyapp.internal.popup.PopupListener
+import com.bkarakoca.cryptocurrencyapp.internal.popup.PopupModel
+import com.bkarakoca.cryptocurrencyapp.internal.util.Event
+import com.bkarakoca.cryptocurrencyapp.internal.util.Failure
+import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
+import com.bkarakoca.cryptocurrencyapp.navigation.NavigationCommand
+import java.lang.Exception
+import javax.inject.Inject
+
+abstract class BaseViewModel : ViewModel() {
+
+    @Inject
+    lateinit var resourceProvider: ResourceProvider
+
+    private val _popup = MutableLiveData<Event<PopupModel>>()
+    val popup: LiveData<Event<PopupModel>> get() = _popup
+
+    private val _navigation = MutableLiveData<Event<NavigationCommand>>()
+    val navigation: LiveData<Event<NavigationCommand>> get() = _navigation
+
+    protected open fun showPopup(message: String) {
+        _popup.value = Event(
+            PopupModel(
+                message = message
+            )
+        )
+    }
+
+    protected fun handleException(e: Throwable) {
+        handleFailure(Failure.CustomException(message = e.localizedMessage))
+    }
+
+    protected fun handleDataStoreResponse(success: Boolean) {
+        if (success) {
+            showPopup(getString(R.string.crypto_favorite_success))
+        } else {
+            showPopup(getString(R.string.common_error_unknown))
+        }
+    }
+
+    protected open fun handleFailure(failure: Failure) {
+        val message = when (failure) {
+            is Failure.NoConnectivityError ->
+                getString(R.string.common_error_network_connection)
+            is Failure.ApiError ->
+                failure.message
+            is Failure.UnknownError ->
+                failure.exception.localizedMessage
+                    ?: getString(R.string.common_error_unknown)
+            is Failure.CustomException ->
+                failure.message
+            is Failure.TimeOutError ->
+                getString(R.string.common_error_timeout)
+            else ->
+                failure.message ?: failure.toString()
+        }
+
+        _popup.value = Event(
+            PopupModel(
+                message = message
+            )
+        )
+    }
+
+    fun navigate(directions: NavDirections) {
+        _navigation.value = Event(NavigationCommand.ToDirection(directions))
+    }
+
+    fun navigate(model: PopupModel, listener: PopupListener?) {
+        _navigation.value = Event(NavigationCommand.Popup(model, listener))
+    }
+
+    fun navigateBack() {
+        _navigation.value = Event(NavigationCommand.Back)
+    }
+
+    protected fun getString(@StringRes resId: Int): String {
+        return resourceProvider.getString(resId)
+    }
+}

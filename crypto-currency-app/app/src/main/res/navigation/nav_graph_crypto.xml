@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_crypto"
+    app:startDestination="@id/cryptoCoinListFragment">
+
+    <fragment
+        android:id="@+id/cryptoCoinListFragment"
+        android:name="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.CryptoCoinListFragment"
+        android:label="@string/crypto_coin_list"
+        tools:layout="@layout/fragment_crypto_list" >
+        <action
+            android:id="@+id/toCryptoCoinDetailFragment"
+            app:destination="@id/cryptoCoinDetailFragment" />
+        <action
+            android:id="@+id/toCryptoCoinFavoritesFragment"
+            app:destination="@id/cryptoCoinFavoritesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cryptoCoinDetailFragment"
+        android:name="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptodetail.CryptoCoinDetailFragment"
+        android:label="@string/crypto_coin_detail"
+        tools:layout="@layout/fragment_crypto_coin_detail" />
+    <fragment
+        android:id="@+id/cryptoCoinFavoritesFragment"
+        android:name="com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptofavorites.CryptoCoinFavoritesFragment"
+        android:label="@string/crypto_coin_favorites" />
+
+</navigation>
