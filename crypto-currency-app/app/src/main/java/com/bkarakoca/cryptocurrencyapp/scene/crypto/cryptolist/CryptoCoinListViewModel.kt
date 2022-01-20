@@ -40,7 +40,7 @@ class CryptoCoinListViewModel @Inject constructor(
     }
 
     fun onCryptoCoinClicked() {
-        navigate(CryptoCoinListFragmentDirections.toCryptoCoinDetailFragment())
+        navigateToCryptoCoinDetailFragment()
     }
 
     fun filterCryptoCoinList(editable: Editable?) {
@@ -56,6 +56,14 @@ class CryptoCoinListViewModel @Inject constructor(
 
     private fun resetCryptoCoinList() {
         _filteredCryptoList.value = cryptoList.value
+    }
+
+    fun navigateToFavoriteCryptoCoinsFragment() {
+        navigate(CryptoCoinListFragmentDirections.toCryptoCoinFavoritesFragment())
+    }
+
+    private fun navigateToCryptoCoinDetailFragment() {
+        navigate(CryptoCoinListFragmentDirections.toCryptoCoinDetailFragment())
     }
 
 }

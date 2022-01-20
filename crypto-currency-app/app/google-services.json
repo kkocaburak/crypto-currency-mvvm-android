@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "558086596723",
+    "project_id": "coingeckocryptoapp",
+    "storage_bucket": "coingeckocryptoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558086596723:android:9193b8858590f4414b2206",
+        "android_client_info": {
+          "package_name": "com.bkarakoca.cryptocurrencyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558086596723-cc11lgs7ml62k2jmkc4qnqjga29cpfoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRfGqzGgHQImyzC3o0wLTWoD2MJ7nYy7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558086596723-cc11lgs7ml62k2jmkc4qnqjga29cpfoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

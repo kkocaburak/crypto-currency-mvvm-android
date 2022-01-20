@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -145,6 +146,12 @@ dependencies {
     implementation "com.github.mrmike:ok2curl:$version.ok2curl"
 
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation "com.google.firebase:firebase-analytics-ktx"
+    implementation "com.google.firebase:firebase-auth-ktx"
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 
     // Test
     testImplementation "junit:junit:$version.jUnit"

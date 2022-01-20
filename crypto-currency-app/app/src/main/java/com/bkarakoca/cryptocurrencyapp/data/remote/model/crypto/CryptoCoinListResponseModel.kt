@@ -7,5 +7,5 @@ data class CryptoCoinResponseModel(
     val symbol: String?,
     val name: String?,
     val image: String?,
-    val currentPrice: Double?
+    val current_price: Double?
 )

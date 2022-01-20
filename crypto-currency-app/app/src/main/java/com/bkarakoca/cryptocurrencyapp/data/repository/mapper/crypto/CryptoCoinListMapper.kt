@@ -22,8 +22,8 @@ class CryptoCoinListMapper @Inject constructor(
                 coinImageUrl = cryptoCoin.image ?: "",
                 coinSymbolText = cryptoCoin.symbol ?: "",
                 coinPriceText = resourceProvider.getString(
-                    R.string.crypto_coin_price_prefix,
-                    cryptoCoin.currentPrice.toString()
+                    R.string.crypto_coin_current_price,
+                    cryptoCoin.current_price.toString()
                 )
             )
         }

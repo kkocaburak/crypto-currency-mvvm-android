@@ -19,10 +19,10 @@ class CryptoCoinDetailMapper @Inject constructor(
                     ?: getString(R.string.crypto_empty_hashing_algorithm),
                 coinNameText = getCoinNameText(responseModel.name),
                 coinSymbolText = getCoinSymbolText(responseModel.symbol),
-                coinDescriptionText = responseModel.description?.englishDescription // TODO : fix this by localization
+                coinDescriptionText = responseModel.description?.englishDescription
                     ?: getString(R.string.crypto_empty_description),
                 coinImageUrl = responseModel.imageModel?.large,
-                coinPriceText = getCoinPriceText(responseModel.currentPrice),
+                coinPriceText = getCoinPriceText(responseModel.marketData?.currentPriceModel?.americanDollar),
                 coinPriceChangeForDayText = getCoinPricePercentageText(responseModel.marketData?.coinPriceChangeForDay)
             )
         }
@@ -42,7 +42,7 @@ class CryptoCoinDetailMapper @Inject constructor(
 
     private fun getCoinPriceText(currentPrice: Double?): String {
         return currentPrice?.let {
-            resourceProvider.getString(R.string.crypto_coin_price_prefix, it.toString())
+            resourceProvider.getString(R.string.crypto_coin_current_price, it.toString())
         } ?: resourceProvider.getString(R.string.crypto_empty_price)
     }
 
