@@ -1,8 +1,8 @@
 # Coin-Gecko Crypto Currency Application
 Coin-Gecko Crypto Currency Application is a simple MVVM pattern application with Single Activity. This application represents simple crypto currency coin listing from binance, a detail page for crypto coin and favorite action with firebase store.
 
-<img src="/images/main-scene-crypto-coin-list.png" width="240"> | <img src="/images/main-scene-filtered-coins.png" width="240"> | <img src="/images/crypto-detail-scene.png" width="240">
-<img src="/images/crypto-add-favorite.png" width="240"> | <img src="/images/crypto-favorite-list.png" width="240"> | <img src="/images/crypto-empty-favorite-list.png" width="240">
+<img src="/images/main-scene-crypto-coin-list.png" width="260"> | <img src="/images/main-scene-filtered-coins.png" width="260"> | <img src="/images/crypto-detail-scene.png" width="260">
+<img src="/images/crypto-add-favorite.png" width="260"> | <img src="/images/crypto-favorite-list.png" width="260"> | <img src="/images/crypto-empty-favorite-list.png" width="260">
 
 ## Technologies
 
@@ -25,7 +25,7 @@ Coin-Gecko Crypto Currency Application is a simple MVVM pattern application with
 - Clean Code
 - Repository Pattern
 
-<img src="/images/architecture-diagram.png" width="320" height="460"> | <img src="/images/project-folder-structure.png" width="320" height="460">
+<img src="/images/architecture-diagram.png" width="320" height="460">
 
 ## License
 
