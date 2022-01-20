@@ -36,6 +36,10 @@ class CryptoCoinListFragment: BaseFragment<CryptoCoinListViewModel, FragmentCryp
         binder.etSearch.doAfterTextChanged { editable ->
             viewModel.filterCryptoCoinList(editable)
         }
+
+        binder.btFavoriteCryptoCoins.setOnClickListener {
+            viewModel.navigateToFavoriteCryptoCoinsFragment()
+        }
     }
 
     override fun setReceivers() {

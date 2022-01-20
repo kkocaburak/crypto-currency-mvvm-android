@@ -12,6 +12,7 @@ import com.bkarakoca.cryptocurrencyapp.internal.util.Event
 import com.bkarakoca.cryptocurrencyapp.internal.util.Failure
 import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
 import com.bkarakoca.cryptocurrencyapp.navigation.NavigationCommand
+import java.lang.Exception
 import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel() {
@@ -19,11 +20,31 @@ abstract class BaseViewModel : ViewModel() {
     @Inject
     lateinit var resourceProvider: ResourceProvider
 
-    private val _failurePopup = MutableLiveData<Event<PopupModel>>()
-    val failurePopup: LiveData<Event<PopupModel>> get() = _failurePopup
+    private val _popup = MutableLiveData<Event<PopupModel>>()
+    val popup: LiveData<Event<PopupModel>> get() = _popup
 
     private val _navigation = MutableLiveData<Event<NavigationCommand>>()
     val navigation: LiveData<Event<NavigationCommand>> get() = _navigation
+
+    protected open fun showPopup(message: String) {
+        _popup.value = Event(
+            PopupModel(
+                message = message
+            )
+        )
+    }
+
+    protected fun handleException(e: Throwable) {
+        handleFailure(Failure.CustomException(message = e.localizedMessage))
+    }
+
+    protected fun handleDataStoreResponse(success: Boolean) {
+        if (success) {
+            showPopup(getString(R.string.crypto_favorite_success))
+        } else {
+            showPopup(getString(R.string.common_error_unknown))
+        }
+    }
 
     protected open fun handleFailure(failure: Failure) {
         val message = when (failure) {
@@ -34,13 +55,15 @@ abstract class BaseViewModel : ViewModel() {
             is Failure.UnknownError ->
                 failure.exception.localizedMessage
                     ?: getString(R.string.common_error_unknown)
+            is Failure.CustomException ->
+                failure.message
             is Failure.TimeOutError ->
                 getString(R.string.common_error_timeout)
             else ->
                 failure.message ?: failure.toString()
         }
 
-        _failurePopup.value = Event(
+        _popup.value = Event(
             PopupModel(
                 message = message
             )

@@ -97,7 +97,15 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> :
     }
 
     private fun observeFailure() {
-        viewModel.failurePopup.observeNonNull(viewLifecycleOwner) {
+        viewModel.popup.observeNonNull(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { popupModel ->
+                requireContext().showPopup(popupModel)
+            }
+        }
+    }
+
+    private fun observePopup() {
+        viewModel.popup.observeNonNull(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { popupModel ->
                 requireContext().showPopup(popupModel)
             }

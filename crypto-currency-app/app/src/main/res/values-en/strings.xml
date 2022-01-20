@@ -9,13 +9,16 @@
 
     <!-- Crypto Resources -->
     <string name="crypto_list_header">Binance - Crypto Coin List</string>
+    <string name="crypto_list_show_favorite_button">My Favorite Crypto Coins</string>
+    <string name="crypto_list_save_favorite_button">Add to Favorites</string>
     <string name="crypto_list_search_hint">Search Crypto Coin</string>
     <string name="crypto_detail_refresh_rate">Crypto Coin Refresh Duration in Seconds</string>
 
     <string name="crypto_coin_name">Name of Crypto Coin: %s</string>
     <string name="crypto_coin_symbol">Symbol of Crypto Coin: %s</string>
-    <string name="crypto_coin_price_prefix">Current Price: </string>
+    <string name="crypto_coin_current_price">Current Price: %s</string>
     <string name="crypto_coin_price_change_percentage">Daily Price Change Percentage: %s</string>
+    <string name="crypto_favorite_success">Favorite Added!</string>
     <string name="crypto_empty_hashing_algorithm">Hash Algorithm is Not Valid</string>
     <string name="crypto_empty_name">Name of Crypto Coin is Not Valid</string>
     <string name="crypto_empty_symbol">Symbol of Crypto Coin is Not Valid</string>
@@ -25,6 +28,7 @@
 
     <string name="crypto_coin_list">Crypto Coin List Fragment</string>
     <string name="crypto_coin_detail">Crypto Coin Detail Fragment</string>
+    <string name="crypto_coin_favorites">Crypto Coin Favorites Fragment</string>
     <!-- Crypto Resources -->
 
 </resources>

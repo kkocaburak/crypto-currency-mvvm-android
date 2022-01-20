@@ -4,8 +4,10 @@ import java.io.IOException
 
 sealed class Failure : IOException() {
     class ApiError(var code: Int, override var message: String) : Failure()
+    class DataStoreFailure(override var message: String? = "Unknown Error") : Failure()
     class UnknownError(val exception: Exception) : Failure()
     class TimeOutError(override var message: String?) : Failure()
+    class CustomException(override var message: String?) : Failure()
     object NoConnectivityError : Failure()
     object EmptyResponse : Failure()
 

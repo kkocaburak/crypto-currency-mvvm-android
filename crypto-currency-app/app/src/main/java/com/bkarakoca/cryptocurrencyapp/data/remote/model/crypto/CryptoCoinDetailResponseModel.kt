@@ -7,7 +7,6 @@ data class CryptoCoinDetailResponseModel(
     val symbol: String?,
     val name: String?,
     val description: CryptoDescriptionModel?,
-    val currentPrice: Double?,
     @SerializedName("image")
     val imageModel: CryptoImageModel?,
     @SerializedName("market_data")
