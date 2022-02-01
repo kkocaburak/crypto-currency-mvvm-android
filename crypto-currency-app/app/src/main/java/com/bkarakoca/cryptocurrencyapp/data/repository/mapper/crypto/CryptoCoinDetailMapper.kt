@@ -1,7 +1,7 @@
 package com.bkarakoca.cryptocurrencyapp.data.repository.mapper.crypto
 
 import com.bkarakoca.cryptocurrencyapp.R
-import com.bkarakoca.cryptocurrencyapp.data.remote.model.crypto.CryptoCoinDetailResponseModel
+import com.bkarakoca.cryptocurrencyapp.data.remote.model.crypto.CryptoCoinDetailResponse
 import com.bkarakoca.cryptocurrencyapp.internal.extension.toPercentageString
 import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
 import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptodetail.model.CryptoCoinDetailUIModel
@@ -11,7 +11,7 @@ class CryptoCoinDetailMapper @Inject constructor(
     private val resourceProvider: ResourceProvider
 ) {
 
-    fun toUIModel(responseModel: CryptoCoinDetailResponseModel): CryptoCoinDetailUIModel {
+    fun toUIModel(responseModel: CryptoCoinDetailResponse): CryptoCoinDetailUIModel {
         with(resourceProvider) {
             return CryptoCoinDetailUIModel(
                 coinId = responseModel.id ?: "",
