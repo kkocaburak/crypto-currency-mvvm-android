@@ -2,6 +2,7 @@ package com.bkarakoca.cryptocurrencyapp.internal.injection.module
 
 import com.bkarakoca.cryptocurrencyapp.BuildConfig
 import com.bkarakoca.cryptocurrencyapp.internal.util.NetworkStateHolder
+import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
 import com.bkarakoca.cryptocurrencyapp.internal.util.api.ErrorHandlingInterceptor
 import com.google.gson.Gson
 import dagger.Lazy
@@ -33,13 +34,14 @@ internal class NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        resourceProvider: ResourceProvider
     ): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
             .connectTimeout(CLIENT_TIME_OUT_SEC, TimeUnit.SECONDS)
             .readTimeout(CLIENT_TIME_OUT_SEC, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(ErrorHandlingInterceptor(NetworkStateHolder, ))
+            .addInterceptor(ErrorHandlingInterceptor(NetworkStateHolder, resourceProvider))
 
         return httpClient.build()
     }

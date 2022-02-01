@@ -12,7 +12,7 @@ import com.bkarakoca.cryptocurrencyapp.internal.util.Event
 import com.bkarakoca.cryptocurrencyapp.internal.util.Failure
 import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
 import com.bkarakoca.cryptocurrencyapp.navigation.NavigationCommand
-import java.lang.Exception
+import kotlinx.coroutines.CoroutineExceptionHandler
 import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel() {
@@ -26,24 +26,17 @@ abstract class BaseViewModel : ViewModel() {
     private val _navigation = MutableLiveData<Event<NavigationCommand>>()
     val navigation: LiveData<Event<NavigationCommand>> get() = _navigation
 
-    protected open fun showPopup(message: String) {
-        _popup.value = Event(
-            PopupModel(
-                message = message
+    protected open fun showErrorPopupWithBackAction(message: String) {
+        _navigation.value = Event(
+            NavigationCommand.Popup(
+                PopupModel(
+                    message = message
+                ),
+                PopupListener(
+                    onPositiveButtonClick = { navigateBack() }
+                )
             )
         )
-    }
-
-    protected fun handleException(e: Throwable) {
-        handleFailure(Failure.CustomException(message = e.localizedMessage))
-    }
-
-    protected fun handleDataStoreResponse(success: Boolean) {
-        if (success) {
-            showPopup(getString(R.string.crypto_favorite_success))
-        } else {
-            showPopup(getString(R.string.common_error_unknown))
-        }
     }
 
     protected open fun handleFailure(failure: Failure) {
@@ -84,5 +77,9 @@ abstract class BaseViewModel : ViewModel() {
 
     protected fun getString(@StringRes resId: Int): String {
         return resourceProvider.getString(resId)
+    }
+
+    val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        handleFailure(Failure.CustomException(message = throwable.localizedMessage))
     }
 }

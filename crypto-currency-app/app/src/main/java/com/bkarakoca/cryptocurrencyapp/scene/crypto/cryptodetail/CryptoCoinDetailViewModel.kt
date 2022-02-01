@@ -2,16 +2,14 @@ package com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptodetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.bkarakoca.cryptocurrencyapp.R
 import com.bkarakoca.cryptocurrencyapp.base.BaseViewModel
 import com.bkarakoca.cryptocurrencyapp.domain.crypto.GetCryptoCoinDetailUseCase
 import com.bkarakoca.cryptocurrencyapp.domain.crypto.SetFavoriteCryptoCoinUseCase
+import com.bkarakoca.cryptocurrencyapp.internal.extension.launch
 import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptodetail.model.CryptoCoinDetailUIModel
 import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.model.CryptoCoinUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
@@ -29,23 +27,21 @@ class CryptoCoinDetailViewModel @Inject constructor(
 
     private var coinPriceRefreshDuration: Long? = null // TODO : use this for repeating coin price update
 
-    fun fetchCryptoCoinDetail(cryptoCoinId: String) = viewModelScope.launch {
+    fun fetchCryptoCoinDetail(cryptoCoinId: String) = launch {
         getCryptoCoinDetailUseCase.execute(
             GetCryptoCoinDetailUseCase.Params(cryptoCoinId)
-        ).catch { t ->
-            handleException(t)
-        }.collect {
+        ).collect {
             _cryptoCoinDetail.value = it
         }
     }
 
-    fun postFavoriteCryptoCoin(cryptoCoinUIModel: CryptoCoinUIModel) = viewModelScope.launch {
+    fun postFavoriteCryptoCoin(cryptoCoinUIModel: CryptoCoinUIModel) = launch {
         setFavoriteCryptoCoinUseCase.execute(
             SetFavoriteCryptoCoinUseCase.Params(cryptoCoinUIModel)
-        ).catch { t ->
-            handleException(t)
-        }.collect {
-            handleDataStoreResponse(it.success)
+        ).collect {
+            if (it.success) {
+                showErrorPopupWithBackAction(getString(R.string.crypto_favorite_success))
+            }
         }
     }
 
