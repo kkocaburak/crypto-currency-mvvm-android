@@ -5,7 +5,20 @@
     <string name="common_error_network_connection">Network error, please try again.</string>
     <string name="common_error_unknown">Unknown error.</string>
     <string name="common_error_timeout">Timeout error.</string>
+    <string name="common_error_login">An error occurred during login</string>
+    <string name="common_error_register_password_not_equal">Passwords are not equal!</string>
+    <string name="common_error_empty_favorites">Favorites are empty!</string>
     <!-- Common Resources -->
+
+    <!-- Login Resources -->
+    <string name="login_header">Please Login</string>
+    <string name="login_user_mail">Enter E-Mail Address</string>
+    <string name="login_user_password">Password: </string>
+    <string name="login_user_password_confirm">Password Confirm: </string>
+    <string name="login_register">Register</string>
+    <string name="login_continue">Login</string>
+    <string name="login_continue_as_guest">Continue as Guest</string>
+    <!-- Login Resources -->
 
     <!-- Crypto Resources -->
     <string name="crypto_list_header">Binance - Crypto Coin List</string>

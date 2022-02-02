@@ -5,7 +5,20 @@
     <string name="common_error_network_connection">Bağlantı hatası, lütfen tekrar deneyin.</string>
     <string name="common_error_unknown">Bilinmeyen hata.</string>
     <string name="common_error_timeout">Bağlantı zaman aşımına uğradı.</string>
+    <string name="common_error_login">Giriş yapma işlemi sırasında bir hata oluştu.</string>
+    <string name="common_error_register_password_not_equal">Şifreler aynı değil!</string>
+    <string name="common_error_empty_favorites">Favorilerin boş!</string>
     <!-- Common Resources -->
+
+    <!-- Login Resources -->
+    <string name="login_header">Lütfen Giriş Yapın</string>
+    <string name="login_user_mail">E-Posta Adresi: </string>
+    <string name="login_user_password">Şifre: </string>
+    <string name="login_user_password_confirm">Şifre Tekrar: </string>
+    <string name="login_register">Kayıt Ol</string>
+    <string name="login_continue">Giriş</string>
+    <string name="login_continue_as_guest">Misafir Olarak Devam Et</string>
+    <!-- Login Resources -->
 
     <!-- Crypto Resources -->
     <string name="crypto_list_header">Binance - Kripto Para Listesi.</string>

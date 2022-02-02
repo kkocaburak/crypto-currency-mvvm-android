@@ -6,7 +6,6 @@ import com.bkarakoca.cryptocurrencyapp.data.remote.model.datastore.DataStoreResp
 import com.bkarakoca.cryptocurrencyapp.data.repository.mapper.crypto.CryptoCoinDetailMapper
 import com.bkarakoca.cryptocurrencyapp.data.repository.mapper.crypto.CryptoCoinFireStoreMapper
 import com.bkarakoca.cryptocurrencyapp.data.repository.mapper.crypto.CryptoCoinListMapper
-import com.bkarakoca.cryptocurrencyapp.data.util.UserConstants
 import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptodetail.model.CryptoCoinDetailUIModel
 import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.model.CryptoCoinUIModel
 import kotlinx.coroutines.flow.Flow
@@ -35,10 +34,9 @@ class CryptoRepository @Inject constructor(
         }
     }
 
-    fun setFavoriteCryptoCoin(cryptoCoinUIModel: CryptoCoinUIModel): Flow<DataStoreResponse> {
+    suspend fun setFavoriteCryptoCoin(cryptoCoinUIModel: CryptoCoinUIModel): Flow<DataStoreResponse> {
         return flow {
-            remoteDataStore.saveDocument(
-                UserConstants.USER_CRYPTO_COIN_FAVORITES,
+            remoteDataStore.updateUserFavoriteCryptoList(
                 cryptoCoinUIModel
             ).collect {
                 emit(it)
@@ -46,13 +44,21 @@ class CryptoRepository @Inject constructor(
         }
     }
 
-    fun fetchCryptoCoinFavoritesList(): Flow<List<CryptoCoinUIModel>> {
+    suspend fun fetchCryptoCoinFavoritesList(): Flow<List<CryptoCoinUIModel>> {
         return flow {
-            remoteDataStore.getDocument(
-                UserConstants.USER_CRYPTO_COIN_FAVORITE_LIST
-            ).collect {
-                emit(cryptoCoinFireStoreMapper.toUIModel(it))
-            }
+            remoteDataStore.fetchUserFavoriteCryptoList()
+                .collect {
+                    emit(cryptoCoinFireStoreMapper.toUIModel(it))
+                }
+        }
+    }
+
+    suspend fun createCryptoCoinFavoritesList(path: String): Flow<DataStoreResponse> {
+        return flow {
+            remoteDataStore.createUserDocument(path)
+                .collect {
+                    emit(it)
+                }
         }
     }
 

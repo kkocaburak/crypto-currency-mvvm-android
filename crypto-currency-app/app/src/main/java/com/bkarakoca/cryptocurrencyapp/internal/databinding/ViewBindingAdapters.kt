@@ -10,6 +10,7 @@ import com.bkarakoca.cryptocurrencyapp.R
 import com.bkarakoca.cryptocurrencyapp.base.BaseListAdapter
 import com.bkarakoca.cryptocurrencyapp.base.ListAdapterItem
 import com.bkarakoca.cryptocurrencyapp.internal.extension.loadImage
+import com.bkarakoca.cryptocurrencyapp.internal.widget.UserInputView
 
 @BindingAdapter("hideIfNull")
 fun setVisible(view: View, obj: Any?) {
@@ -31,20 +32,6 @@ fun visibleIf(view: View, shouldVisible: Boolean) {
     }
 }
 
-@Suppress("UNCHECKED_CAST")
-@BindingAdapter("submitList")
-fun submitList(view: RecyclerView, list: List<ListAdapterItem>?) {
-    val adapter = view.adapter as BaseListAdapter<ViewDataBinding, ListAdapterItem>?
-    adapter?.submitList(list)
-}
-
-@BindingAdapter("adapter")
-fun setAdapter(view: RecyclerView, adapter: BaseListAdapter<ViewDataBinding, ListAdapterItem>?) {
-    adapter?.let {
-        view.adapter = it
-    }
-}
-
 @BindingAdapter("imageFromUrl", "placeholderRes", "errorRes", requireAll = false)
 fun setImage(
     view: ImageView,
@@ -59,4 +46,9 @@ fun setImage(
         placeholderRes ?: defaultDrawable,
         errorRes ?: defaultDrawable
     )
+}
+
+@BindingAdapter("textResourceId")
+fun setUserInputHeader(view: UserInputView, resId: Int) {
+    view.binding.tvHeaderUserInput.text = view.context.getString(resId)
 }

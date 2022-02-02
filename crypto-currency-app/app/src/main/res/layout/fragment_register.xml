@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bkarakoca.cryptocurrencyapp.scene.login.register.RegisterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_large">
+
+        <TextView
+            android:id="@+id/tvHeaderLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_register"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.bkarakoca.cryptocurrencyapp.internal.widget.UserInputView
+            android:id="@+id/inputViewEmail"
+            textResourceId="@{viewModel.registerEmailTextResId}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_huge"
+            app:layout_constraintTop_toBottomOf="@+id/tvHeaderLogin" />
+
+        <com.bkarakoca.cryptocurrencyapp.internal.widget.UserInputView
+            android:id="@+id/inputViewPassword"
+            textResourceId="@{viewModel.registerPasswordTextResId}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintTop_toBottomOf="@+id/inputViewEmail" />
+
+        <com.bkarakoca.cryptocurrencyapp.internal.widget.UserInputView
+            android:id="@+id/inputViewPasswordConfirm"
+            textResourceId="@{viewModel.registerPasswordConfirmTextResId}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintTop_toBottomOf="@+id/inputViewPassword" />
+
+        <Button
+            android:id="@+id/btRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/login_register"
+            app:layout_constraintTop_toBottomOf="@+id/inputViewPasswordConfirm" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
