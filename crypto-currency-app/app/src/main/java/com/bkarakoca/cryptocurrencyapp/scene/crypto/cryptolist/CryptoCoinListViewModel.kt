@@ -1,6 +1,6 @@
 package com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist
 
-import android.text.Editable
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bkarakoca.cryptocurrencyapp.base.BaseViewModel
@@ -17,19 +17,21 @@ class CryptoCoinListViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _cryptoList = MutableLiveData<List<CryptoCoinUIModel>>()
-    private val cryptoList: LiveData<List<CryptoCoinUIModel>> get() = _cryptoList
+    val cryptoList: LiveData<List<CryptoCoinUIModel>> get() = _cryptoList
 
     private val _filteredCryptoList = MutableLiveData<List<CryptoCoinUIModel>>()
     val filteredCryptoList: LiveData<List<CryptoCoinUIModel>> get() = _filteredCryptoList
 
     fun fetchCryptoCoinList() = launch {
         cryptoListUseCase.execute(Unit)
-            .collect {
-                postCryptoCoinList(it)
+            .collect { cryptoCoinUIModelList ->
+                postCryptoCoinList(cryptoCoinUIModelList)
             }
     }
 
-    private fun postCryptoCoinList(cryptoCoinUIModelList: List<CryptoCoinUIModel>) {
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    internal fun postCryptoCoinList(cryptoCoinUIModelList: List<CryptoCoinUIModel>) {
         _cryptoList.value = cryptoCoinUIModelList
         _filteredCryptoList.value = cryptoList.value
     }
@@ -38,13 +40,13 @@ class CryptoCoinListViewModel @Inject constructor(
         navigateToCryptoCoinDetailFragment()
     }
 
-    fun filterCryptoCoinList(editable: Editable?) {
-        if (editable.isNullOrEmpty()) {
+    fun filterCryptoCoinList(searchText: String) {
+        if (searchText.isEmpty()) {
             resetCryptoCoinList()
         } else {
             _filteredCryptoList.value = cryptoList.value?.filter {
-                (it.coinNameText.contains(editable.toString(), ignoreCase = true)
-                        || it.coinSymbolText.contains(editable.toString(), ignoreCase = true))
+                (it.coinNameText.contains(searchText, ignoreCase = true)
+                        || it.coinSymbolText.contains(searchText, ignoreCase = true))
             }
         }
     }

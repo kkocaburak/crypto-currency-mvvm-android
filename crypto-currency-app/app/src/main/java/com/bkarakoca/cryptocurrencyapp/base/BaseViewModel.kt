@@ -1,6 +1,7 @@
 package com.bkarakoca.cryptocurrencyapp.base
 
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
