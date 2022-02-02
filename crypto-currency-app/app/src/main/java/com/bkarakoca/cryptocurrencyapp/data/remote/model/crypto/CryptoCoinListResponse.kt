@@ -1,6 +1,6 @@
 package com.bkarakoca.cryptocurrencyapp.data.remote.model.crypto
 
-class CryptoCoinListResponseModel : ArrayList<CryptoCoinResponseModel>()
+class CryptoCoinListResponse : ArrayList<CryptoCoinResponseModel>()
 
 data class CryptoCoinResponseModel(
     val id: String?,

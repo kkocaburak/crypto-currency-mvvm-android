@@ -1,6 +1,6 @@
 package com.bkarakoca.cryptocurrencyapp.data.util
 
 object UserConstants {
-    const val USER_CRYPTO_COIN_FAVORITES = "crypto_coin/"
-    const val USER_CRYPTO_COIN_FAVORITE_LIST = "crypto_coin"
+    const val USER_FAVORITE_CRYPTO_DOCUMENT_NAME = "favorite_list"
+    const val USER_FAVORITE_CRYPTO_LIST_NAME = "coins"
 }

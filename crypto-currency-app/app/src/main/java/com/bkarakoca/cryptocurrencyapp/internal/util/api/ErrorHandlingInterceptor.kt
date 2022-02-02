@@ -1,7 +1,9 @@
 package com.bkarakoca.cryptocurrencyapp.internal.util.api
 
+import com.bkarakoca.cryptocurrencyapp.R
 import com.bkarakoca.cryptocurrencyapp.internal.util.Failure
 import com.bkarakoca.cryptocurrencyapp.internal.util.NetworkStateHolder
+import com.bkarakoca.cryptocurrencyapp.internal.util.ResourceProvider
 import java.io.IOException
 import java.net.SocketTimeoutException
 import okhttp3.Interceptor
@@ -10,12 +12,13 @@ import retrofit2.HttpException
 
 class ErrorHandlingInterceptor(
     private val networkStateHolder: NetworkStateHolder,
+    private val resourceProvider: ResourceProvider
 ) : Interceptor {
 
     @Throws(IOException::class, Failure::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!networkStateHolder.isConnected) {
-            throw Failure.NoConnectivityError
+            throw Failure.NoConnectivityError(resourceProvider.getString(R.string.common_error_network_connection))
         }
 
         val response = try {
@@ -45,9 +48,5 @@ class ErrorHandlingInterceptor(
                 message = "" // TODO :
             )
         }
-    }
-
-    companion object {
-        private const val UNKNOWN_ERROR = "Unknown error"
     }
 }

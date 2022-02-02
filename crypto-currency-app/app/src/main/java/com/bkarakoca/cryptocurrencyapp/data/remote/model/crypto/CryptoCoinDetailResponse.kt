@@ -2,7 +2,7 @@ package com.bkarakoca.cryptocurrencyapp.data.remote.model.crypto
 
 import com.google.gson.annotations.SerializedName
 
-data class CryptoCoinDetailResponseModel(
+data class CryptoCoinDetailResponse(
     val id: String?,
     val symbol: String?,
     val name: String?,

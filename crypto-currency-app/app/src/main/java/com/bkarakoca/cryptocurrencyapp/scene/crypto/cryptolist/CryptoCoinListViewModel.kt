@@ -1,17 +1,14 @@
 package com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist
 
-import android.text.Editable
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.bkarakoca.cryptocurrencyapp.base.BaseViewModel
 import com.bkarakoca.cryptocurrencyapp.domain.crypto.GetCryptoListUseCase
-import com.bkarakoca.cryptocurrencyapp.internal.util.Failure
+import com.bkarakoca.cryptocurrencyapp.internal.extension.launch
 import com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptolist.model.CryptoCoinUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,16 +22,16 @@ class CryptoCoinListViewModel @Inject constructor(
     private val _filteredCryptoList = MutableLiveData<List<CryptoCoinUIModel>>()
     val filteredCryptoList: LiveData<List<CryptoCoinUIModel>> get() = _filteredCryptoList
 
-    fun fetchCryptoCoinList() = viewModelScope.launch {
+    fun fetchCryptoCoinList() = launch {
         cryptoListUseCase.execute(Unit)
-            .catch { failure ->
-                handleFailure(failure as Failure)
-            }.collect {
-                postCryptoCoinList(it)
+            .collect { cryptoCoinUIModelList ->
+                postCryptoCoinList(cryptoCoinUIModelList)
             }
     }
 
-    private fun postCryptoCoinList(cryptoCoinUIModelList: List<CryptoCoinUIModel>) {
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    internal fun postCryptoCoinList(cryptoCoinUIModelList: List<CryptoCoinUIModel>) {
         _cryptoList.value = cryptoCoinUIModelList
         _filteredCryptoList.value = cryptoList.value
     }
@@ -43,13 +40,13 @@ class CryptoCoinListViewModel @Inject constructor(
         navigateToCryptoCoinDetailFragment()
     }
 
-    fun filterCryptoCoinList(editable: Editable?) {
-        if (editable.isNullOrEmpty()) {
+    fun filterCryptoCoinList(searchText: String) {
+        if (searchText.isEmpty()) {
             resetCryptoCoinList()
         } else {
             _filteredCryptoList.value = cryptoList.value?.filter {
-                (it.coinNameText.contains(editable.toString(), ignoreCase = true)
-                        || it.coinSymbolText.contains(editable.toString(), ignoreCase = true))
+                (it.coinNameText.contains(searchText, ignoreCase = true)
+                        || it.coinSymbolText.contains(searchText, ignoreCase = true))
             }
         }
     }
