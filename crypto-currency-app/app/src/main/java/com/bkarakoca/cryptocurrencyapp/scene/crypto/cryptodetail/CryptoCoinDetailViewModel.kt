@@ -40,7 +40,7 @@ class CryptoCoinDetailViewModel @Inject constructor(
             SetFavoriteCryptoCoinUseCase.Params(cryptoCoinUIModel)
         ).collect {
             if (it.success) {
-                showErrorPopupWithBackAction(getString(R.string.crypto_favorite_success))
+                showPopup(getString(R.string.crypto_favorite_success))
             }
         }
     }

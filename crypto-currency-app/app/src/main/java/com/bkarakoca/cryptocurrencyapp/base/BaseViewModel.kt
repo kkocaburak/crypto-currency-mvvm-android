@@ -39,6 +39,10 @@ abstract class BaseViewModel : ViewModel() {
         )
     }
 
+    protected open fun showPopup(message: String) {
+        _popup.value = Event(PopupModel(message = message))
+    }
+
     protected open fun handleFailure(failure: Failure) {
         val message = when (failure) {
             is Failure.NoConnectivityError ->

@@ -2,6 +2,7 @@ package com.bkarakoca.cryptocurrencyapp.scene.crypto.cryptofavorites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bkarakoca.cryptocurrencyapp.R
 import com.bkarakoca.cryptocurrencyapp.base.BaseViewModel
 import com.bkarakoca.cryptocurrencyapp.domain.crypto.GetFavoriteCryptoCoinsUseCase
 import com.bkarakoca.cryptocurrencyapp.internal.extension.launch
@@ -22,7 +23,7 @@ class CryptoCoinFavoritesViewModel @Inject constructor(
     fun fetchFavoriteCryptoCoins() = launch {
         getFavoriteCryptoCoinsUseCase.execute(Unit)
             .catch {
-                showErrorPopupWithBackAction(message = "favorites are empty")
+                showErrorPopupWithBackAction(message = getString(R.string.common_error_empty_favorites))
             }
             .collect {
                 _cryptoList.value = it
